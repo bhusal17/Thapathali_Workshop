@@ -48,38 +48,38 @@ endif
 
 # Add inputs and outputs from these tool invocations to the build variables 
 SECONDARY_FLASH += \
-stm32_bluepill.bin \
+template_bluepill.bin \
 
 SECONDARY_SIZE += \
-stm32_bluepill.siz \
+template_bluepill.siz \
 
 
 # All Target
-all: stm32_bluepill.elf secondary-outputs
+all: template_bluepill.elf secondary-outputs
 
 # Tool invocations
-stm32_bluepill.elf: $(OBJS) $(USER_OBJS)
+template_bluepill.elf: $(OBJS) $(USER_OBJS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: GNU ARM Cross C++ Linker'
-	arm-none-eabi-g++ -mcpu=cortex-m4 -mthumb -Og -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -ffreestanding -fno-move-loop-invariants -Wall -Wextra  -g3 -T mem.ld -T libs.ld -T sections.ld -nostartfiles -Xlinker --gc-sections -L"../ldscripts" -Wl,-Map,"stm32_bluepill.map" --specs=nano.specs -o "stm32_bluepill.elf" $(OBJS) $(USER_OBJS) $(LIBS)
+	arm-none-eabi-g++ -mcpu=cortex-m4 -mthumb -Og -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -ffreestanding -fno-move-loop-invariants -Wall -Wextra  -g3 -T mem.ld -T libs.ld -T sections.ld -nostartfiles -Xlinker --gc-sections -L"../ldscripts" -Wl,-Map,"template_bluepill.map" --specs=nano.specs -o "template_bluepill.elf" $(OBJS) $(USER_OBJS) $(LIBS)
 	@echo 'Finished building target: $@'
 	@echo ' '
 
-stm32_bluepill.bin: stm32_bluepill.elf
+template_bluepill.bin: template_bluepill.elf
 	@echo 'Invoking: GNU ARM Cross Create Flash Image'
-	arm-none-eabi-objcopy -O binary "stm32_bluepill.elf"  "stm32_bluepill.bin"
+	arm-none-eabi-objcopy -O binary "template_bluepill.elf"  "template_bluepill.bin"
 	@echo 'Finished building: $@'
 	@echo ' '
 
-stm32_bluepill.siz: stm32_bluepill.elf
+template_bluepill.siz: template_bluepill.elf
 	@echo 'Invoking: GNU ARM Cross Print Size'
-	arm-none-eabi-size --format=berkeley "stm32_bluepill.elf"
+	arm-none-eabi-size --format=berkeley "template_bluepill.elf"
 	@echo 'Finished building: $@'
 	@echo ' '
 
 # Other Targets
 clean:
-	-$(RM) $(CC_DEPS)$(C++_DEPS)$(OBJS)$(C_UPPER_DEPS)$(CXX_DEPS)$(SECONDARY_FLASH)$(SECONDARY_SIZE)$(ASM_DEPS)$(S_UPPER_DEPS)$(C_DEPS)$(CPP_DEPS) stm32_bluepill.elf
+	-$(RM) $(CC_DEPS)$(C++_DEPS)$(OBJS)$(C_UPPER_DEPS)$(CXX_DEPS)$(SECONDARY_FLASH)$(SECONDARY_SIZE)$(ASM_DEPS)$(S_UPPER_DEPS)$(C_DEPS)$(CPP_DEPS) template_bluepill.elf
 	-@echo ' '
 
 secondary-outputs: $(SECONDARY_FLASH) $(SECONDARY_SIZE)
