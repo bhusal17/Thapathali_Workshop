@@ -12,6 +12,25 @@
 
 __IO uint32_t uwTICK;
 
+void write_gpio_port(GPIORegister_structure *GPIOX, uint16_t output_value){
+	GPIOX->OutputDatareg = GPIOX->OutputDatareg;
+}
+
+uint16_t read_gpio_port(GPIORegister_structure *GPIOx){
+	return (GPIOx->InputDataReg);
+}
+
+void configure_gpio_port(GPIORegister_structure *GPIOX, uint16_t pin_mode){
+	if (pin_mode < 8){
+		GPIOX->ConfigRegLow= pin_mode;
+	}
+	else{
+		GPIOX->ConfigRegHigh= pin_mode;
+	}
+}
+
+
+
 void configure_gpio_pin(GPIORegister_structure *GPIOX, uint8_t pin_number, uint8_t pin_mode){
 
 	if(pin_number < 8){
