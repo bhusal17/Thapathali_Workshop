@@ -20,9 +20,9 @@ uint16_t read_gpio_port(GPIORegister_structure *GPIOx){
 	return (GPIOx->InputDataReg);
 }
 
-void configure_gpio_port(GPIORegister_structure *GPIOX, uint32_t pin_mode){
-		GPIOX->ConfigRegLow= pin_mode;
-		GPIOX->ConfigRegHigh= pin_mode;
+void configure_gpio_port(GPIORegister_structure *GPIOX, uint32_t lower_pins_mode, uint32_t higher_pins_mode){
+		GPIOX->ConfigRegLow= lower_pins_mode;
+		GPIOX->ConfigRegHigh= higher_pins_mode;
 }
 
 
