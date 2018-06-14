@@ -2545,6 +2545,12 @@ Discarded input sections
  .text          0x0000000000000000        0x0 ./src/gpio_interface.o
  .data          0x0000000000000000        0x0 ./src/gpio_interface.o
  .bss           0x0000000000000000        0x0 ./src/gpio_interface.o
+ .text.write_gpio_port
+                0x0000000000000000        0x4 ./src/gpio_interface.o
+ .text.read_gpio_port
+                0x0000000000000000        0x6 ./src/gpio_interface.o
+ .text.configure_gpio_port
+                0x0000000000000000        0xc ./src/gpio_interface.o
  .text.configure_gpio_pin
                 0x0000000000000000       0x38 ./src/gpio_interface.o
  .text.read_gpio_pin
@@ -3613,7 +3619,7 @@ END GROUP
 .debug_sfnames
  *(.debug_sfnames)
 
-.debug_aranges  0x0000000000000000      0x468
+.debug_aranges  0x0000000000000000      0x480
  *(.debug_aranges)
  .debug_aranges
                 0x0000000000000000       0xd0 ./system/src/stm32f1xx/stm32f1xx_hal.o
@@ -3640,18 +3646,18 @@ END GROUP
  .debug_aranges
                 0x0000000000000350       0x28 ./system/src/cmsis/system_stm32f1xx.o
  .debug_aranges
-                0x0000000000000378       0x50 ./src/gpio_interface.o
+                0x0000000000000378       0x68 ./src/gpio_interface.o
  .debug_aranges
-                0x00000000000003c8       0x20 ./src/main.o
+                0x00000000000003e0       0x20 ./src/main.o
  .debug_aranges
-                0x00000000000003e8       0x20 ./src/stm32f1xx_hal_msp.o
+                0x0000000000000400       0x20 ./src/stm32f1xx_hal_msp.o
  .debug_aranges
-                0x0000000000000408       0x60 ./src/stm32f1xx_it.o
+                0x0000000000000420       0x60 ./src/stm32f1xx_it.o
 
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x0000000000000000     0x94c4
+.debug_info     0x0000000000000000     0x9558
  *(.debug_info .gnu.linkonce.wi.*)
  .debug_info    0x0000000000000000      0xf85 ./system/src/stm32f1xx/stm32f1xx_hal.o
  .debug_info    0x0000000000000f85     0x1454 ./system/src/stm32f1xx/stm32f1xx_hal_cortex.o
@@ -3665,10 +3671,10 @@ END GROUP
  .debug_info    0x000000000000549d     0x1063 ./system/src/cortexm/exception_handlers.o
  .debug_info    0x0000000000006500       0x22 ./system/src/cmsis/startup_stm32f103xb.o
  .debug_info    0x0000000000006522      0x3cb ./system/src/cmsis/system_stm32f1xx.o
- .debug_info    0x00000000000068ed      0xb84 ./src/gpio_interface.o
- .debug_info    0x0000000000007471      0x9c2 ./src/main.o
- .debug_info    0x0000000000007e33      0xcaf ./src/stm32f1xx_hal_msp.o
- .debug_info    0x0000000000008ae2      0x9e2 ./src/stm32f1xx_it.o
+ .debug_info    0x00000000000068ed      0xc18 ./src/gpio_interface.o
+ .debug_info    0x0000000000007505      0x9c2 ./src/main.o
+ .debug_info    0x0000000000007ec7      0xcaf ./src/stm32f1xx_hal_msp.o
+ .debug_info    0x0000000000008b76      0x9e2 ./src/stm32f1xx_it.o
 
 .debug_abbrev   0x0000000000000000     0x1f85
  *(.debug_abbrev)
@@ -3689,7 +3695,7 @@ END GROUP
  .debug_abbrev  0x0000000000001b59      0x234 ./src/stm32f1xx_hal_msp.o
  .debug_abbrev  0x0000000000001d8d      0x1f8 ./src/stm32f1xx_it.o
 
-.debug_line     0x0000000000000000     0x3f81
+.debug_line     0x0000000000000000     0x3fb8
  *(.debug_line)
  .debug_line    0x0000000000000000      0x6a9 ./system/src/stm32f1xx/stm32f1xx_hal.o
  .debug_line    0x00000000000006a9      0x6c1 ./system/src/stm32f1xx/stm32f1xx_hal_cortex.o
@@ -3703,12 +3709,12 @@ END GROUP
  .debug_line    0x000000000000234b      0x4b7 ./system/src/cortexm/exception_handlers.o
  .debug_line    0x0000000000002802       0x86 ./system/src/cmsis/startup_stm32f103xb.o
  .debug_line    0x0000000000002888      0x1aa ./system/src/cmsis/system_stm32f1xx.o
- .debug_line    0x0000000000002a32      0x587 ./src/gpio_interface.o
- .debug_line    0x0000000000002fb9      0x522 ./src/main.o
- .debug_line    0x00000000000034db      0x4fc ./src/stm32f1xx_hal_msp.o
- .debug_line    0x00000000000039d7      0x5aa ./src/stm32f1xx_it.o
+ .debug_line    0x0000000000002a32      0x5be ./src/gpio_interface.o
+ .debug_line    0x0000000000002ff0      0x522 ./src/main.o
+ .debug_line    0x0000000000003512      0x4fc ./src/stm32f1xx_hal_msp.o
+ .debug_line    0x0000000000003a0e      0x5aa ./src/stm32f1xx_it.o
 
-.debug_frame    0x0000000000000000      0xae4
+.debug_frame    0x0000000000000000      0xb14
  *(.debug_frame)
  .debug_frame   0x0000000000000000      0x1ac ./system/src/stm32f1xx/stm32f1xx_hal.o
  .debug_frame   0x00000000000001ac      0x12c ./system/src/stm32f1xx/stm32f1xx_hal_cortex.o
@@ -3721,24 +3727,24 @@ END GROUP
  .debug_frame   0x00000000000004c8       0x40 ./system/src/cortexm/_initialize_hardware.o
  .debug_frame   0x0000000000000508      0x144 ./system/src/cortexm/exception_handlers.o
  .debug_frame   0x000000000000064c       0x30 ./system/src/cmsis/system_stm32f1xx.o
- .debug_frame   0x000000000000067c       0xa4 ./src/gpio_interface.o
- .debug_frame   0x0000000000000720       0x28 ./src/main.o
- .debug_frame   0x0000000000000748       0x2c ./src/stm32f1xx_hal_msp.o
- .debug_frame   0x0000000000000774       0xa8 ./src/stm32f1xx_it.o
- .debug_frame   0x000000000000081c       0x20 /home/bichar4/STM32Toolchain/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/libg_nano.a(lib_a-errno.o)
- .debug_frame   0x000000000000083c       0x28 /home/bichar4/STM32Toolchain/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/libg_nano.a(lib_a-memcpy-stub.o)
- .debug_frame   0x0000000000000864       0x4c /home/bichar4/STM32Toolchain/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/libg_nano.a(lib_a-vsnprintf.o)
- .debug_frame   0x00000000000008b0       0x90 /home/bichar4/STM32Toolchain/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/libg_nano.a(lib_a-nano-svfprintf.o)
- .debug_frame   0x0000000000000940       0x60 /home/bichar4/STM32Toolchain/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/libg_nano.a(lib_a-nano-vfprintf_i.o)
- .debug_frame   0x00000000000009a0       0x28 /home/bichar4/STM32Toolchain/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/libg_nano.a(lib_a-memmove.o)
- .debug_frame   0x00000000000009c8       0x38 /home/bichar4/STM32Toolchain/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/libg_nano.a(lib_a-nano-freer.o)
- .debug_frame   0x0000000000000a00       0x2c /home/bichar4/STM32Toolchain/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/libg_nano.a(lib_a-nano-mallocr.o)
- .debug_frame   0x0000000000000a2c       0x3c /home/bichar4/STM32Toolchain/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/libg_nano.a(lib_a-nano-reallocr.o)
- .debug_frame   0x0000000000000a68       0x2c /home/bichar4/STM32Toolchain/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/libg_nano.a(lib_a-sbrkr.o)
- .debug_frame   0x0000000000000a94       0x30 /home/bichar4/STM32Toolchain/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/libg_nano.a(lib_a-mlock.o)
- .debug_frame   0x0000000000000ac4       0x20 /home/bichar4/STM32Toolchain/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/libg_nano.a(lib_a-nano-msizer.o)
+ .debug_frame   0x000000000000067c       0xd4 ./src/gpio_interface.o
+ .debug_frame   0x0000000000000750       0x28 ./src/main.o
+ .debug_frame   0x0000000000000778       0x2c ./src/stm32f1xx_hal_msp.o
+ .debug_frame   0x00000000000007a4       0xa8 ./src/stm32f1xx_it.o
+ .debug_frame   0x000000000000084c       0x20 /home/bichar4/STM32Toolchain/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/libg_nano.a(lib_a-errno.o)
+ .debug_frame   0x000000000000086c       0x28 /home/bichar4/STM32Toolchain/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/libg_nano.a(lib_a-memcpy-stub.o)
+ .debug_frame   0x0000000000000894       0x4c /home/bichar4/STM32Toolchain/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/libg_nano.a(lib_a-vsnprintf.o)
+ .debug_frame   0x00000000000008e0       0x90 /home/bichar4/STM32Toolchain/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/libg_nano.a(lib_a-nano-svfprintf.o)
+ .debug_frame   0x0000000000000970       0x60 /home/bichar4/STM32Toolchain/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/libg_nano.a(lib_a-nano-vfprintf_i.o)
+ .debug_frame   0x00000000000009d0       0x28 /home/bichar4/STM32Toolchain/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/libg_nano.a(lib_a-memmove.o)
+ .debug_frame   0x00000000000009f8       0x38 /home/bichar4/STM32Toolchain/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/libg_nano.a(lib_a-nano-freer.o)
+ .debug_frame   0x0000000000000a30       0x2c /home/bichar4/STM32Toolchain/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/libg_nano.a(lib_a-nano-mallocr.o)
+ .debug_frame   0x0000000000000a5c       0x3c /home/bichar4/STM32Toolchain/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/libg_nano.a(lib_a-nano-reallocr.o)
+ .debug_frame   0x0000000000000a98       0x2c /home/bichar4/STM32Toolchain/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/libg_nano.a(lib_a-sbrkr.o)
+ .debug_frame   0x0000000000000ac4       0x30 /home/bichar4/STM32Toolchain/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/libg_nano.a(lib_a-mlock.o)
+ .debug_frame   0x0000000000000af4       0x20 /home/bichar4/STM32Toolchain/gcc-arm/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/libg_nano.a(lib_a-nano-msizer.o)
 
-.debug_str      0x0000000000000000    0x6adbb
+.debug_str      0x0000000000000000    0x6adfd
  *(.debug_str)
  .debug_str     0x0000000000000000    0x67b65 ./system/src/stm32f1xx/stm32f1xx_hal.o
                                       0x67f4f (size before relaxing)
@@ -3764,16 +3770,16 @@ END GROUP
                                          0x8c (size before relaxing)
  .debug_str     0x000000000006a96d       0x7b ./system/src/cmsis/system_stm32f1xx.o
                                       0x55662 (size before relaxing)
- .debug_str     0x000000000006a9e8      0x345 ./src/gpio_interface.o
-                                      0x67b2f (size before relaxing)
- .debug_str     0x000000000006ad2d       0x20 ./src/main.o
+ .debug_str     0x000000000006a9e8      0x387 ./src/gpio_interface.o
+                                      0x67b71 (size before relaxing)
+ .debug_str     0x000000000006ad6f       0x20 ./src/main.o
                                       0x679fc (size before relaxing)
- .debug_str     0x000000000006ad4d       0x46 ./src/stm32f1xx_hal_msp.o
+ .debug_str     0x000000000006ad8f       0x46 ./src/stm32f1xx_hal_msp.o
                                       0x67b38 (size before relaxing)
- .debug_str     0x000000000006ad93       0x28 ./src/stm32f1xx_it.o
+ .debug_str     0x000000000006add5       0x28 ./src/stm32f1xx_it.o
                                       0x67a8a (size before relaxing)
 
-.debug_loc      0x0000000000000000      0xd7d
+.debug_loc      0x0000000000000000      0xd9e
  *(.debug_loc)
  .debug_loc     0x0000000000000000       0xfd ./system/src/stm32f1xx/stm32f1xx_hal.o
  .debug_loc     0x00000000000000fd      0x5ad ./system/src/stm32f1xx/stm32f1xx_hal_cortex.o
@@ -3784,7 +3790,7 @@ END GROUP
  .debug_loc     0x0000000000000a31       0x21 ./system/src/diag/trace_impl.o
  .debug_loc     0x0000000000000a52      0x15a ./system/src/cortexm/exception_handlers.o
  .debug_loc     0x0000000000000bac       0xdf ./system/src/cmsis/system_stm32f1xx.o
- .debug_loc     0x0000000000000c8b       0xf2 ./src/gpio_interface.o
+ .debug_loc     0x0000000000000c8b      0x113 ./src/gpio_interface.o
 
 .debug_macinfo
  *(.debug_macinfo)
@@ -3802,7 +3808,7 @@ END GROUP
  *(.debug_varnames)
 OUTPUT(template_bluepill.elf elf32-littlearm)
 
-.debug_ranges   0x0000000000000000      0x418
+.debug_ranges   0x0000000000000000      0x430
  .debug_ranges  0x0000000000000000       0xc0 ./system/src/stm32f1xx/stm32f1xx_hal.o
  .debug_ranges  0x00000000000000c0       0xe0 ./system/src/stm32f1xx/stm32f1xx_hal_cortex.o
  .debug_ranges  0x00000000000001a0       0x18 ./system/src/newlib/_exit.o
@@ -3815,10 +3821,10 @@ OUTPUT(template_bluepill.elf elf32-littlearm)
  .debug_ranges  0x00000000000002b8       0x78 ./system/src/cortexm/exception_handlers.o
  .debug_ranges  0x0000000000000330       0x20 ./system/src/cmsis/startup_stm32f103xb.o
  .debug_ranges  0x0000000000000350       0x18 ./system/src/cmsis/system_stm32f1xx.o
- .debug_ranges  0x0000000000000368       0x40 ./src/gpio_interface.o
- .debug_ranges  0x00000000000003a8       0x10 ./src/main.o
- .debug_ranges  0x00000000000003b8       0x10 ./src/stm32f1xx_hal_msp.o
- .debug_ranges  0x00000000000003c8       0x50 ./src/stm32f1xx_it.o
+ .debug_ranges  0x0000000000000368       0x58 ./src/gpio_interface.o
+ .debug_ranges  0x00000000000003c0       0x10 ./src/main.o
+ .debug_ranges  0x00000000000003d0       0x10 ./src/stm32f1xx_hal_msp.o
+ .debug_ranges  0x00000000000003e0       0x50 ./src/stm32f1xx_it.o
 
 .debug_macro    0x0000000000000000    0x1534d
  .debug_macro   0x0000000000000000      0x2df ./system/src/stm32f1xx/stm32f1xx_hal.o
