@@ -2,7 +2,7 @@
 #define __PORT_STRUCT__
 //just for test
 #include<stdint.h>
-#include "stm32f103xb.h"
+#include<main.h>
 
 //Base address of GPIO PORT Register
 #define GPIOA_BASE_ADDRESS 0x40010800
@@ -26,11 +26,17 @@ typedef struct{
 
 //Base address of Register related to Ports
 
-#define GPIO_POART_A ( (GPIORegister_structure *) GPIOA_BASE_ADDRESS )
-#define GPIO_POART_B ( (GPIORegister_structure *) GPIOB_BASE_ADDRESS )
-#define GPIO_POART_C ( (GPIORegister_structure *) GPIOC_BASE_ADDRESS )
-#define GPIO_POART_D ( (GPIORegister_structure *) GPIOD_BASE_ADDRESS )
-#define GPIO_POART_E ( (GPIORegister_structure *) GPIOE_BASE_ADDRESS )
+#define GPIO_PORT_A ( (GPIORegister_structure *) GPIOA_BASE_ADDRESS )
+#define GPIO_PORT_B ( (GPIORegister_structure *) GPIOB_BASE_ADDRESS )
+#define GPIO_PORT_C ( (GPIORegister_structure *) GPIOC_BASE_ADDRESS )
+#define GPIO_PORT_D ( (GPIORegister_structure *) GPIOD_BASE_ADDRESS )
+#define GPIO_PORT_E ( (GPIORegister_structure *) GPIOE_BASE_ADDRESS )
+
+//GPIO CLOCK
+#define GPIO_CLOCK_A 0
+#define GPIO_CLOCK_B 1
+#define GPIO_CLOCK_C 2
 
 #endif
+
 
