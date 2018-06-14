@@ -13,7 +13,7 @@
 __IO uint32_t uwTICK;
 
 void write_gpio_port(GPIORegister_structure *GPIOX, uint16_t output_value){
-	GPIOX->OutputDatareg = GPIOX->OutputDatareg;
+	GPIOX->OutputDatareg = output_value;
 }
 
 uint16_t read_gpio_port(GPIORegister_structure *GPIOx){
