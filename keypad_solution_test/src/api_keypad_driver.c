@@ -23,7 +23,7 @@ void api_gpio_config_for_keypad()
 
 	for(int i = 0; i < NUMBER_OF_ROWS; i++)
 		{
-			write_gpio_pin(KEYPAD_PORT, RowMatrix[i], 1);
+			write_gpio_pin(KEYPAD_PORT, RowMatrix[i], 0);
 		}
 
 	for (int count = 0; count < NUMBER_OF_COLUMN; count++)
@@ -34,27 +34,28 @@ void api_gpio_config_for_keypad()
 	}
 }
 
-unsigned char api_scan_keypad()
+uint8_t api_scan_keypad()
 {
-	for(int i = 0; i < NUMBER_OF_ROWS; i++)
-	{	
-		write_gpio_pin(KEYPAD_PORT, RowMatrix[i], 1);
-	}
+//	for(int i = 0; i < NUMBER_OF_ROWS; i++)
+//	{
+//		write_gpio_pin(KEYPAD_PORT, RowMatrix[i], 1);
+//	}
+
 	uint8_t pinvalue=0;
-	unsigned char pressed_key='X';
+	uint8_t pressed_key=4;
 	for(int row = 0; row < NUMBER_OF_ROWS; row++)
 	{
-		write_gpio_pin(KEYPAD_PORT, RowMatrix[row], 0);
+		write_gpio_pin(KEYPAD_PORT, RowMatrix[row], 1);
 		int column = 0;
 		do
 		{
 			pinvalue = read_gpio_pin(KEYPAD_PORT, ColumnMatrix[column]);
 			column +=1; 
 			
-		} while ( ( (pinvalue != 0x00) && (column != NUMBER_OF_COLUMN ) ) );
+		} while ( ( (pinvalue != 0x01) && (column != NUMBER_OF_COLUMN ) ) );
 		
-		write_gpio_pin(KEYPAD_PORT, RowMatrix[row], 1);
-		if( pinvalue == 0x00)
+		write_gpio_pin(KEYPAD_PORT, RowMatrix[row], 0);
+		if( pinvalue == 0x01)
 		{
 			column = column - 1;
 			pressed_key = KeypadMatrix[row][column];
@@ -62,4 +63,5 @@ unsigned char api_scan_keypad()
 		}
 	}
 	return pressed_key;
+	//return 0;
 }

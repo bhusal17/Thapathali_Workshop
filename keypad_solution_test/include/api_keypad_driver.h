@@ -34,6 +34,6 @@ unsigned char RowMatrix[NUMBER_OF_ROWS] = {ROW_1_PIN, ROW_2_PIN, ROW_3_PIN, ROW_
 */
 
 void api_gpio_config_for_keypad();
-unsigned char api_scan_keypad();
+uint8_t api_scan_keypad();
 
 #endif

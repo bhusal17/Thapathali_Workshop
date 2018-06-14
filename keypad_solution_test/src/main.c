@@ -17,18 +17,19 @@ int main(void)
 
   api_gpio_config_for_keypad();
 
-  unsigned char pressedKey= api_scan_keypad();
+  uint8_t pressedKey;
 
-	  while(1){
+  while(1){
 
-		  if(pressedKey % 2== 0 ){
+	  pressedKey= api_scan_keypad();
+	  if(pressedKey%2 == 0 ){
 			  write_gpio_pin(GPIO_PORT_C,13,0);
 		  }
 		  else{
 			  write_gpio_pin(GPIO_PORT_C,13,1);
 		  }
-		  delay_ms(4000);
-		  pressedKey= api_scan_keypad();
+		  delay_ms(1000);
+
 	  }
   }
 
