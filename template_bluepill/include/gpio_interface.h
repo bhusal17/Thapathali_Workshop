@@ -13,6 +13,9 @@
 #include "stm32f1xx_hal.h"
 
 
+void configure_gpio_port(GPIORegister_structure *GPIOX, uint16_t pin_mode);
+void write_gpio_port(GPIORegister_structure *GPIOX, uint16_t output_value);
+uint16_t read_gpio_port(GPIORegister_structure *GPIOx);
 
 void configure_gpio_pin(GPIORegister_structure *GPIOX, uint8_t pin_number, uint8_t pin_mode);
 
