@@ -15,18 +15,18 @@ __IO uint32_t uwTICK;
 void configure_gpio_pin(GPIORegister_structure *GPIOX, uint8_t pin_number, uint8_t pin_mode){
 
 	if(pin_number < 8){
-		GPIOX->ConfigRegLow = ( GPIOX->ConfigRegLow & ( ~ ( 1<< (pin_number*4) ) ) ) | (pin_mode << (pin_number*4) );
+		GPIOX->ConfigRegLow = ( GPIOX->ConfigRegLow & ( ~ ( 0xf<< (pin_number*4) ) ) ) | (pin_mode << (pin_number*4) );
 
 	}
 	else{
 		pin_number = pin_number - 8;
-		GPIOX->ConfigRegHigh = ( GPIOX->ConfigRegHigh & ( ~ ( 1<< (pin_number*4) ) ) ) | (pin_mode << (pin_number*4) );
+		GPIOX->ConfigRegHigh = ( GPIOX->ConfigRegHigh & ( ~ ( 0xf<< (pin_number*4) ) ) ) | (pin_mode << (pin_number*4) );
 	}
 }
 
 uint8_t read_gpio_pin(GPIORegister_structure *GPIOX, uint8_t pin_number){
 
-	return( ( GPIOX->InputDataReg >> pin_number ) & 0x01 );
+	return( ( ( GPIOX->InputDataReg ) >> pin_number ) & 0x01 );
 }
 
 void write_gpio_pin(GPIORegister_structure *GPIOX, uint8_t pin_number, uint8_t output_value){
