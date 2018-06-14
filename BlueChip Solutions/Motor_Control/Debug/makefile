@@ -29,38 +29,38 @@ endif
 
 # Add inputs and outputs from these tool invocations to the build variables 
 SECONDARY_FLASH += \
-stm32f103_bluePill_template.hex \
+Motor_Control.hex \
 
 SECONDARY_SIZE += \
-stm32f103_bluePill_template.siz \
+Motor_Control.siz \
 
 
 # All Target
-all: stm32f103_bluePill_template.elf secondary-outputs
+all: Motor_Control.elf secondary-outputs
 
 # Tool invocations
-stm32f103_bluePill_template.elf: $(OBJS) $(USER_OBJS)
+Motor_Control.elf: $(OBJS) $(USER_OBJS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: GNU ARM Cross C Linker'
-	arm-none-eabi-gcc -mcpu=cortex-m3 -mthumb -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections  -g3 -T "/media/bhusal/Study/Learning/Embedded System/Embedded System Programming/Level-II 32 bit controller, Device driver and RTOS/STM32/STM32 Eclipse Linux/STM32F103xx BlueChip Projects/STM32F103xx BlueChip Template/stm32f103_bluePill_template/ldscripts/STM32F103C8Tx_FLASH.ld" -Xlinker --gc-sections -Wl,-Map,"stm32f103_bluePill_template.map" -o "stm32f103_bluePill_template.elf" $(OBJS) $(USER_OBJS) $(LIBS)
+	arm-none-eabi-gcc -mcpu=cortex-m3 -mthumb -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections  -g3 -T "/media/bhusal/Study/Learning/Embedded System/Embedded System Programming/Level-II 32 bit controller, Device driver and RTOS/STM32/STM32 Eclipse Linux/Thapathali_ARM_workshop/Thapathali_Workshop/BlueChip Solutions/Motor_Control/ldscripts/STM32F103C8Tx_FLASH.ld" -Xlinker --gc-sections -Wl,-Map,"Motor_Control.map" -o "Motor_Control.elf" $(OBJS) $(USER_OBJS) $(LIBS)
 	@echo 'Finished building target: $@'
 	@echo ' '
 
-stm32f103_bluePill_template.hex: stm32f103_bluePill_template.elf
+Motor_Control.hex: Motor_Control.elf
 	@echo 'Invoking: GNU ARM Cross Create Flash Image'
-	arm-none-eabi-objcopy -O ihex "stm32f103_bluePill_template.elf"  "stm32f103_bluePill_template.hex"
+	arm-none-eabi-objcopy -O ihex "Motor_Control.elf"  "Motor_Control.hex"
 	@echo 'Finished building: $@'
 	@echo ' '
 
-stm32f103_bluePill_template.siz: stm32f103_bluePill_template.elf
+Motor_Control.siz: Motor_Control.elf
 	@echo 'Invoking: GNU ARM Cross Print Size'
-	arm-none-eabi-size --format=berkeley "stm32f103_bluePill_template.elf"
+	arm-none-eabi-size --format=berkeley "Motor_Control.elf"
 	@echo 'Finished building: $@'
 	@echo ' '
 
 # Other Targets
 clean:
-	-$(RM) $(OBJS)$(SECONDARY_FLASH)$(SECONDARY_SIZE)$(ASM_DEPS)$(S_UPPER_DEPS)$(C_DEPS) stm32f103_bluePill_template.elf
+	-$(RM) $(OBJS)$(SECONDARY_FLASH)$(SECONDARY_SIZE)$(ASM_DEPS)$(S_UPPER_DEPS)$(C_DEPS) Motor_Control.elf
 	-@echo ' '
 
 secondary-outputs: $(SECONDARY_FLASH) $(SECONDARY_SIZE)

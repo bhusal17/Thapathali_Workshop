@@ -1,4 +1,4 @@
-#include "port_struct.h"
+#include "gpio_interface.h"
 
 void configure_gpio_pin(GPIORegister_structure *GPIOX, uint8_t pin_number, uint8_t pin_mode){
 
@@ -8,7 +8,7 @@ void configure_gpio_pin(GPIORegister_structure *GPIOX, uint8_t pin_number, uint8
 	}
 	else{
 		pin_number = pin_number - 8;
-		GPIOX->ConfigRegLow = ( GPIOX->ConfigRegLow & ( ~ ( 1<< pin_number ) ) ) | (pin_mode << pin_number );
+		GPIOX->ConfigRegHigh = ( GPIOX->ConfigRegHigh & ( ~ ( 1<< pin_number ) ) ) | (pin_mode << pin_number );
 	}
 }
 
@@ -24,7 +24,7 @@ void write_gpio_pin(GPIORegister_structure *GPIOX, uint8_t pin_number, uint8_t o
 
 //Function for writing to GPIOx_Output_Register
 
-void write_gpio_port(GPIORegister_structure *GPIOX, uint8_t, uint8_t output_value){
+void write_gpio_port(GPIORegister_structure *GPIOX, uint16_t output_value){
 
         GPIOX->OutputDatareg = ( GPIOX->OutputDatareg  | output_value );
 }

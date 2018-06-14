@@ -29,38 +29,38 @@ endif
 
 # Add inputs and outputs from these tool invocations to the build variables 
 SECONDARY_FLASH += \
-stm32f103_bluePill_template.hex \
+LCD_Interfacing.hex \
 
 SECONDARY_SIZE += \
-stm32f103_bluePill_template.siz \
+LCD_Interfacing.siz \
 
 
 # All Target
-all: stm32f103_bluePill_template.elf secondary-outputs
+all: LCD_Interfacing.elf secondary-outputs
 
 # Tool invocations
-stm32f103_bluePill_template.elf: $(OBJS) $(USER_OBJS)
+LCD_Interfacing.elf: $(OBJS) $(USER_OBJS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: GNU ARM Cross C Linker'
-	arm-none-eabi-gcc -mcpu=cortex-m3 -mthumb -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections  -g3 -T "/media/bhusal/Study/Learning/Embedded System/Embedded System Programming/Level-II 32 bit controller, Device driver and RTOS/STM32/STM32 Eclipse Linux/STM32F103xx BlueChip Projects/STM32F103xx BlueChip Template/stm32f103_bluePill_template/ldscripts/STM32F103C8Tx_FLASH.ld" -Xlinker --gc-sections -Wl,-Map,"stm32f103_bluePill_template.map" -o "stm32f103_bluePill_template.elf" $(OBJS) $(USER_OBJS) $(LIBS)
+	arm-none-eabi-gcc -mcpu=cortex-m3 -mthumb -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections  -g3 -T "/media/bhusal/Study/Learning/Embedded System/Embedded System Programming/Level-II 32 bit controller, Device driver and RTOS/STM32/STM32 Eclipse Linux/Thapathali_ARM_workshop/Thapathali_Workshop/BlueChip Solutions/LCD_Interfacing/ldscripts/STM32F103C8Tx_FLASH.ld" -Xlinker --gc-sections -Wl,-Map,"LCD_Interfacing.map" -o "LCD_Interfacing.elf" $(OBJS) $(USER_OBJS) $(LIBS)
 	@echo 'Finished building target: $@'
 	@echo ' '
 
-stm32f103_bluePill_template.hex: stm32f103_bluePill_template.elf
+LCD_Interfacing.hex: LCD_Interfacing.elf
 	@echo 'Invoking: GNU ARM Cross Create Flash Image'
-	arm-none-eabi-objcopy -O ihex "stm32f103_bluePill_template.elf"  "stm32f103_bluePill_template.hex"
+	arm-none-eabi-objcopy -O ihex "LCD_Interfacing.elf"  "LCD_Interfacing.hex"
 	@echo 'Finished building: $@'
 	@echo ' '
 
-stm32f103_bluePill_template.siz: stm32f103_bluePill_template.elf
+LCD_Interfacing.siz: LCD_Interfacing.elf
 	@echo 'Invoking: GNU ARM Cross Print Size'
-	arm-none-eabi-size --format=berkeley "stm32f103_bluePill_template.elf"
+	arm-none-eabi-size --format=berkeley "LCD_Interfacing.elf"
 	@echo 'Finished building: $@'
 	@echo ' '
 
 # Other Targets
 clean:
-	-$(RM) $(OBJS)$(SECONDARY_FLASH)$(SECONDARY_SIZE)$(ASM_DEPS)$(S_UPPER_DEPS)$(C_DEPS) stm32f103_bluePill_template.elf
+	-$(RM) $(OBJS)$(SECONDARY_FLASH)$(SECONDARY_SIZE)$(ASM_DEPS)$(S_UPPER_DEPS)$(C_DEPS) LCD_Interfacing.elf
 	-@echo ' '
 
 secondary-outputs: $(SECONDARY_FLASH) $(SECONDARY_SIZE)

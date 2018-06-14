@@ -2,6 +2,7 @@
 #define __PORT_STRUCT__
 //just for test
 #include<stdint.h>
+#include "stm32f103xb.h"
 
 //Base address of GPIO PORT Register
 #define GPIOA_BASE_ADDRESS 0x40010800

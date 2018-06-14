@@ -24,4 +24,31 @@
 		<nature>org.eclipse.cdt.managedbuilder.core.ScannerConfigNature</nature>
 		<nature>org.eclipse.linuxtools.tmf.project.nature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>Debug/gpio_interface.h</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/GPIO_Driver_Files/Include%20Files/gpio_interface.h</locationURI>
+		</link>
+		<link>
+			<name>Debug/port_struct.h</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/GPIO_Driver_Files/Include%20Files/port_struct.h</locationURI>
+		</link>
+		<link>
+			<name>include/gpio_interface.h</name>
+			<type>1</type>
+			<locationURI>WORKSPACE_LOC/GPIO_Driver_Files/Include%20Files/gpio_interface.h</locationURI>
+		</link>
+		<link>
+			<name>include/port_struct.h</name>
+			<type>1</type>
+			<locationURI>WORKSPACE_LOC/GPIO_Driver_Files/Include%20Files/port_struct.h</locationURI>
+		</link>
+		<link>
+			<name>source/gpio_interface.c</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/GPIO_Driver_Files/Source%20Files/gpio_interface.c</locationURI>
+		</link>
+	</linkedResources>
 </projectDescription>
