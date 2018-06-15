@@ -1,12 +1,20 @@
 #include "api_lcd_driver.h"
 
 
+LCD_configStruct LCD_configMatrix[11]={
+		{LCD_Enable_PORT,LCD_Enable_PIN},
+		{LCD_RW_PORT,LCD_RW_PIN},
+		{LCD_ModeSelect_PORT,LCD_ModeSelect_PIN},
+		{LCD_D0_PORT,LCD_D0_PIN},
+		{LCD_D1_PORT,LCD_D1_PIN},
+		{LCD_D2_PORT,LCD_D2_PIN},
+		{LCD_D3_PORT,LCD_D3_PIN},
+		{LCD_D4_PORT,LCD_D4_PIN},
+		{LCD_D5_PORT,LCD_D5_PIN},
+		{LCD_D6_PORT,LCD_D6_PIN},
+		{LCD_D7_PORT,LCD_D7_PIN}
+};
 
-vPORTx createLCDvPort(vPort_comp *lcdVportDiet[]){
-  vPORTx LCDPort;
-  LCDPort = create_virtual_port(lcdVportDiet);
-  return LCDPort;
-}
 
 
 
@@ -19,33 +27,75 @@ vPORTx createLCDvPort(vPort_comp *lcdVportDiet[]){
 	*				   higher frequency. Look LCD datasheets for other commands.
 	*/
 	
+vPort_comp sevensegdiet[11]={
+		{LCD_Enable_PORT,LCD_Enable_PIN},
+		{LCD_RW_PORT,LCD_RW_PIN},
+		{LCD_ModeSelect_PORT,LCD_ModeSelect_PIN},
+		{LCD_D0_PORT,LCD_D0_PIN},
+		{LCD_D1_PORT,LCD_D1_PIN},
+		{LCD_D2_PORT,LCD_D2_PIN},
+		{LCD_D3_PORT,LCD_D3_PIN},
+		{LCD_D4_PORT,LCD_D4_PIN},
+		{LCD_D5_PORT,LCD_D5_PIN},
+		{LCD_D6_PORT,LCD_D6_PIN},
+		{LCD_D7_PORT,LCD_D7_PIN}
+};
+
+vPORTx createLCDPort(){
+	vPORTx LCDPort;
+	vPort_comp *segdietout[8];
+			for(uint8_t i=0; i<8; i++){
+				segdietout[i]=&sevensegdiet[i];
+			}
+		  LCDPort = create_virtual_port(segdietout);
+		  return LCDPort;
+}
+
 void localLCD_check_status(){
 
-	gpio_lcd_config_data.port_mode_type = GPIO_PORT_INPUT_MODE;
-	gpio_lcd_config_data.port_input_type = GPIO_PORT_INPUT_TYPE_TRISTATE;
-	hal_gpio_port_setup(LCD_DATA_PORT, &gpio_lcd_config_data); 
-	//Sets up the LCD DATA PORT to Input for checking LCD status
+	//sets the dataport in input tristate mode
+	for(uint8_t i=3; i<11; i++){
+						configure_gpio_pin(LCD_configMatrix[i].LCDX_port,LCD_configMatrix[i].LCDX_pin,4);
+			}
 
+//
+//	gpio_lcd_config_data.port_mode_type = GPIO_PORT_INPUT_MODE;
+//	gpio_lcd_config_data.port_input_type = GPIO_PORT_INPUT_TYPE_TRISTATE;
+//	//hal_gpio_port_setup(LCD_DATA_PORT, &gpio_lcd_config_data);
 
+	gpio_write_pin(LCD_configMatrix[1].LCDX_port,LCD_configMatrix[1].LCDX_pin,0x01/*LCD Read Mode*/);
+	gpio_write_pin(LCD_configMatrix[2].LCDX_port,LCD_configMatrix[2].LCDX_pin,LCD_COMMAND_MODE);
 
-	
-	hal_gpio_write_to_pin(LCD_CONTROL_PORT, LCD_RWPin, LCD_READ_MODE);
-	hal_gpio_write_to_pin(LCD_CONTROL_PORT, LCD_ModeSelectPin, LCD_COMMAND_MODE);
+//	hal_gpio_write_to_pin(LCD_CONTROL_PORT, LCD_RWPin, LCD_READ_MODE);
+//	hal_gpio_write_to_pin(LCD_CONTROL_PORT, LCD_ModeSelectPin, LCD_COMMAND_MODE);
+
 	//uint8_t pinvalue = 1;
 	//while( pinvalue == 1)
 	//{
 		//set lcd latch enable pin to high
-		hal_gpio_write_to_pin(LCD_CONTROL_PORT, LCD_EnablePin, GPIO_PIN_OUTPUT_HIGH);
-		_delay_us(100);
-		hal_gpio_write_to_pin(LCD_CONTROL_PORT, LCD_EnablePin, GPIO_PIN_OUTPUT_LOW);
-		//pinvalue = hal_gpio_read_from_pin(LCD_DATA_PORT, PB7 );
+	gpio_write_pin(LCD_configMatrix[0].LCDX_port,LCD_configMatrix[0].LCDX_pin,1);
+	delay_ms(100);
+	gpio_write_pin(LCD_configMatrix[0].LCDX_port,LCD_configMatrix[0].LCDX_pin,0);
+//		hal_gpio_write_to_pin(LCD_CONTROL_PORT, LCD_EnablePin, GPIO_PIN_OUTPUT_HIGH);
+//		_delay_us(100);
+//		hal_gpio_write_to_pin(LCD_CONTROL_PORT, LCD_EnablePin, GPIO_PIN_OUTPUT_LOW);
+
+	//pinvalue = hal_gpio_read_from_pin(LCD_DATA_PORT, PB7 );
 	//}
 	//set the LCD data port to output mode 
 	
-	gpio_lcd_config_data.port_mode_type = GPIO_PORT_OUTPUT_MODE;
-	hal_gpio_port_setup(LCD_DATA_PORT, &gpio_lcd_config_data);
-	hal_gpio_write_to_pin(LCD_CONTROL_PORT, LCD_RWPin, LCD_WRITE_MODE);
-	hal_gpio_write_to_pin(LCD_CONTROL_PORT, LCD_ModeSelectPin, LCD_DATA_MODE);
+
+	for(uint8_t i=3; i<11; i++){
+							configure_gpio_pin(LCD_configMatrix[i].LCDX_port,LCD_configMatrix[i].LCDX_pin,1);
+				}
+
+	gpio_write_pin(LCD_configMatrix[1].LCDX_port,LCD_configMatrix[1].LCDX_pin,LCD_WRITE_MODE);
+	gpio_write_pin(LCD_configMatrix[2].LCDX_port,LCD_configMatrix[2].LCDX_pin,LCD_DATA_MODE);
+
+	//	gpio_lcd_config_data.port_mode_type = GPIO_PORT_OUTPUT_MODE;
+//	hal_gpio_port_setup(LCD_DATA_PORT, &gpio_lcd_config_data);
+//	hal_gpio_write_to_pin(LCD_CONTROL_PORT, LCD_RWPin, LCD_WRITE_MODE);
+//	hal_gpio_write_to_pin(LCD_CONTROL_PORT, LCD_ModeSelectPin, LCD_DATA_MODE);
 }
 
 /**					Send command to LCD
@@ -59,34 +109,30 @@ void localLCD_check_status(){
 void localLCD_send_command (uint8_t LCDcommand){
 	
 	localLCD_check_status();//at the end of this function lcd is in data write mode and data port in write mode
-	hal_gpio_write_to_pin(LCD_CONTROL_PORT, LCD_ModeSelectPin, LCD_COMMAND_MODE);
-	hal_gpio_write_to_port(LCD_DATA_PORT, LCDcommand);
-	hal_gpio_write_to_pin(LCD_CONTROL_PORT, LCD_EnablePin, GPIO_PIN_OUTPUT_HIGH);
-	_delay_us(1);
-	hal_gpio_write_to_pin(LCD_CONTROL_PORT, LCD_EnablePin, GPIO_PIN_OUTPUT_LOW);
+
+	gpio_write_pin(LCD_configMatrix[2].LCDX_port,LCD_configMatrix[2].LCDX_pin,LCD_COMMAND_MODE);
+
+	write_vPort(LCDPort,LCDcommand);
+	gpio_write_pin(LCD_configMatrix[2].LCDX_port,LCD_configMatrix[2].LCDX_pin,1);
+	delay_ms(1);
+	gpio_write_pin(LCD_configMatrix[2].LCDX_port,LCD_configMatrix[2].LCDX_pin,0);
+
+	//	hal_gpio_write_to_pin(LCD_CONTROL_PORT, LCD_ModeSelectPin, LCD_COMMAND_MODE);
+	//hal_gpio_write_to_port(LCD_DATA_PORT, LCDcommand);
+	//hal_gpio_write_to_pin(LCD_CONTROL_PORT, LCD_EnablePin, GPIO_PIN_OUTPUT_HIGH);
+	//_delay_us(1);
+	//hal_gpio_write_to_pin(LCD_CONTROL_PORT, LCD_EnablePin, GPIO_PIN_OUTPUT_LOW);
 	
 }
 
 //setups pins of the microcontroller to which lcd is connected
 void localLCD_pins_setup(){
-		
-		gpio_pin_conf_t lcd_pin_setup_data;
-		lcd_pin_setup_data.mode_type = GPIO_PIN_OUTPUT_MODE;
-		lcd_pin_setup_data.pin = LCD_EnablePin;
-		hal_gpio_init(LCD_CONTROL_PORT, &lcd_pin_setup_data);
-		
-		lcd_pin_setup_data.mode_type = GPIO_PIN_OUTPUT_MODE;
-		lcd_pin_setup_data.pin = LCD_RWPin;
-		hal_gpio_init(LCD_CONTROL_PORT, &lcd_pin_setup_data);
-		
-		lcd_pin_setup_data.mode_type = GPIO_PIN_OUTPUT_MODE;
-		lcd_pin_setup_data.pin = LCD_ModeSelectPin;
-		hal_gpio_init(LCD_CONTROL_PORT, &lcd_pin_setup_data);
-		
-		gpio_lcd_config_data.port_mode_type = GPIO_PORT_OUTPUT_MODE;
-		hal_gpio_port_setup(LCD_DATA_PORT, &gpio_lcd_config_data);
-				
-		
+
+		LCD_configStruct lcd_pin_setup_data;
+		//initializing the LCD pins
+		for(uint8_t i=0; i<11; i++){
+					configure_gpio_pin(LCD_configMatrix[i].LCDX_port,LCD_configMatrix[i].LCDX_pin,1);
+		}
 }
 		
 //Functions Definitions
@@ -114,13 +160,13 @@ void apiLCD_initializeLCD(){
 //hal_gpio_write_to_port(LCD_DATA_PORT, LCDcommand);
 	
 	
-	_delay_ms(15);
+	delay_ms(15);
 	localLCD_send_command(0x38);	//This is the first command to lcd, it sets the data mode to 8 bit wit 2 display lines adnd 5*8 fonts
-	_delay_us(80);
+	delay_us(80);
 	localLCD_send_command(0x0C);	// This command make the display on and cursor on, cursor blinking on
-	_delay_us(80);
+	delay_us(80);
 	localLCD_send_command(0x01);	//this command clears the display and set cursor to 0,0
-	_delay_ms(2);
+	delay_ms(2);
 //	localLCD_send_command(0x02);
 //	_delay_ms(2);
 	
@@ -138,7 +184,7 @@ void apiLCD_initializeLCD(){
 void apiLCD_clear_screen(){
 	
 	localLCD_send_command(0x01);
-	_delay_ms(2);
+	delay_ms(2);
 }
 
 
@@ -178,10 +224,11 @@ void apiLCD_display_screenON(){
 void apiLCD_send_character(char LCDcharacter){
 
 	localLCD_check_status();
-	hal_gpio_write_to_port(LCD_DATA_PORT,LCDcharacter);
-	hal_gpio_write_to_pin(LCD_CONTROL_PORT, LCD_EnablePin, GPIO_PIN_OUTPUT_HIGH);
-	_delay_us(1);
-	hal_gpio_write_to_pin(LCD_CONTROL_PORT, LCD_EnablePin, GPIO_PIN_OUTPUT_LOW);
+	write_vPort(LCDPort,LCDcharacter);
+	//hal_gpio_write_to_port(LCD_DATA_PORT,LCDcharacter);
+	gpio_write_pin(LCD_configMatrix[0].LCDX_port,LCD_configMatrix[0].LCDX_pin,1/*GPIO_PIN_OUTPUT_HIGH*/);
+	delay_ms(1);
+	gpio_write_pin(LCD_configMatrix[0].LCDX_port,LCD_configMatrix[0].LCDX_pin,1/*GPIO_PIN_OUTPUT_LOW*/);
 }
 
 

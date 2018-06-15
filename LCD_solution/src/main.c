@@ -3,12 +3,16 @@
 #include "stm32f1xx_hal.h"
 #include "gpio_interface.h"
 #include "api_keypad_driver.h"
+#include "api_lcd_driver.h"
 
 
+ vPORTx *LCDPort;
+ uint8_t LCDcommand1;
 int main(void)
 {
-  HAL_Init();
 
+  HAL_Init();
+  //LCDPort = createLCDPort();
   enable_gpio_clock(GPIO_CLOCK_C);
   enable_gpio_clock(GPIO_CLOCK_A);
   enable_gpio_clock(GPIO_CLOCK_B);

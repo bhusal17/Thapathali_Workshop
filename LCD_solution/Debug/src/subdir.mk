@@ -6,6 +6,7 @@
 C_SRCS += \
 ../src/api_keypad_driver.c \
 ../src/api_lcd_driver.c \
+../src/delay.c \
 ../src/gpio_interface.c \
 ../src/main.c \
 ../src/stm32f1xx_hal_msp.c \
@@ -14,6 +15,7 @@ C_SRCS += \
 OBJS += \
 ./src/api_keypad_driver.o \
 ./src/api_lcd_driver.o \
+./src/delay.o \
 ./src/gpio_interface.o \
 ./src/main.o \
 ./src/stm32f1xx_hal_msp.o \
@@ -22,6 +24,7 @@ OBJS += \
 C_DEPS += \
 ./src/api_keypad_driver.d \
 ./src/api_lcd_driver.d \
+./src/delay.d \
 ./src/gpio_interface.d \
 ./src/main.d \
 ./src/stm32f1xx_hal_msp.d \

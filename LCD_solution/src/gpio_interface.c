@@ -15,7 +15,7 @@ __IO uint32_t uwTICK;
 
 vPORTx create_virtual_port(vPort_comp *vportcomponentstruct[]){
 	vPORTx  virtualPort;
-	for(uint8_t j=0, i=0; i< 8; i++){
+	for(uint8_t i=0; i< 8; i++){
 		virtualPort.vPortElement[i].Port_name = vportcomponentstruct[i]->Port_name;
 		virtualPort.vPortElement[i].Pin_number= vportcomponentstruct[i]->Pin_number;
 	}
@@ -26,9 +26,9 @@ vPORTx create_virtual_port(vPort_comp *vportcomponentstruct[]){
 void write_vPort(vPORTx *VPORTX, uint8_t data){
 
 	for(uint8_t i=0; i<8; i++){
-		VPORTX->vPortElement[i].Port_name =
-				( ( VPORTX->vPortElement[i].Port_name /* previous data read */
-				& ( ~ (1 << VPORTX->vPortElement[i].Pin_number)) ) /* Desired Pin masked */
+		VPORTX->vPortElement[i].Port_name->OutputDatareg =
+				( ( VPORTX->vPortElement[i].Port_name->OutputDatareg /* previous data read */
+				& ( ~ (1 << (VPORTX->vPortElement[i].Pin_number) )) ) /* Desired Pin masked */
 				| ( ( ( data >> i ) & 0x01 ) << VPORTX->vPortElement[i].Pin_number) );/* data input gives has the value to be written to
 				                                                           the virtual port pins, first the virtual port ith bit value is
 				is shifted to the 0th positon and all other bits are made 0, then the 0th bit is shifted to the pinnumber of actual port */
