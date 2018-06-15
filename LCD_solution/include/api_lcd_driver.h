@@ -1,43 +1,44 @@
 #ifndef _LCD_Library_H_
 #define  _LCD_Library_H_
 
+#include "gpio_interface.h"
 
 //following macros are defined here, letter define these on the application file
-#define LCD_Enable_PORT
-#define LCD_Enable_PIN
+#define LCD_Enable_PORT		GPIO_PORT_A
+#define LCD_Enable_PIN		0
 
-#define LCD_RW_PORT
-#define LCD_RW_PIN
+#define LCD_RW_PORT		GPIO_PORT_A
+#define LCD_RW_PIN		0
 
-#define LCD_ModeSelect_PORT
-#define LCD_ModeSelect_PIN
+#define LCD_ModeSelect_PORT		GPIO_PORT_A
+#define LCD_ModeSelect_PIN		0
 
-#define LCD_D0_PORT
-#define LCD_D0_PIN
+#define LCD_D0_PORT		GPIO_PORT_A
+#define LCD_D0_PIN		0
 
-#define LCD_D1_PORT
-#define LCD_D1_PIN
+#define LCD_D1_PORT		GPIO_PORT_A
+#define LCD_D1_PIN		0
 
-#define LCD_D2_PORT
-#define LCD_D2_PIN
+#define LCD_D2_PORT		GPIO_PORT_A
+#define LCD_D2_PIN		0
 
-#define LCD_D3_PORT
-#define LCD_D3_PIN
+#define LCD_D3_PORT		GPIO_PORT_A
+#define LCD_D3_PIN		0
 
-#define LCD_D4_PORT
-#define LCD_D4_PIN
+#define LCD_D4_PORT		GPIO_PORT_A
+#define LCD_D4_PIN		0
 
-#define LCD_D5_PORT
-#define LCD_D5_PIN
+#define LCD_D5_PORT		GPIO_PORT_A
+#define LCD_D5_PIN		0
 
-#define LCD_D6_PORT
-#define LCD_D6_PIN
+#define LCD_D6_PORT		GPIO_PORT_A
+#define LCD_D6_PIN		0
 
-#define LCD_D7_PORT
-#define LCD_D7_PIN
+#define LCD_D7_PORT		GPIO_PORT_A
+#define LCD_D7_PIN		0
 
 #define F_CPU 16000000
-#include <util/delay.h>
+
 #include "gpio_interface.h"
 //gpio_port_conf_data *gpio_lcd_config_data;
 
@@ -46,6 +47,38 @@ typedef struct{
 	GPIORegister_structure *LCDX_port;
 	uint8_t LCDX_pin;
 }LCD_configStruct;
+
+LCD_configStruct LCD_configMatrix[11]={
+		{LCD_Enable_PORT,LCD_Enable_PIN},
+		{LCD_RW_PORT,LCD_RW_PIN},
+		{LCD_ModeSelect_PORT,LCD_ModeSelect_PIN},
+		{LCD_D0_PORT,LCD_D0_PIN},
+		{LCD_D1_PORT,LCD_D1_PIN},
+		{LCD_D2_PORT,LCD_D2_PIN},
+		{LCD_D3_PORT,LCD_D3_PIN},
+		{LCD_D4_PORT,LCD_D4_PIN},
+		{LCD_D5_PORT,LCD_D5_PIN},
+		{LCD_D6_PORT,LCD_D6_PIN},
+		{LCD_D7_PORT,LCD_D7_PIN}
+};
+
+
+/**********************For creating Virtual PORT for LCD*****************/
+
+vPort_comp LCDVirtualPortdiet[8]={
+
+				{LCD_D0_PORT,LCD_D0_PIN},
+				{LCD_D1_PORT,LCD_D1_PIN},
+				{LCD_D2_PORT,LCD_D2_PIN},
+				{LCD_D3_PORT,LCD_D3_PIN},
+				{LCD_D4_PORT,LCD_D4_PIN},
+				{LCD_D5_PORT,LCD_D5_PIN},
+				{LCD_D6_PORT,LCD_D6_PIN},
+				{LCD_D7_PORT,LCD_D7_PIN}
+};
+
+
+/*****************Virtual PORT of LCD created above*******************/
 
 //Macros definition
 //Define these macros in your program at the top
@@ -98,6 +131,15 @@ typedef struct{
 							User exposed API for accssing the Alphanumeric LCD library
 	
 ***********************************************************************************************************************************************/	
+
+
+
+
+
+vPORTx createLCDvPort(vPort_comp *lcdVportDiet[]);
+
+
+
 
 	/**			LCD initialization functions
 	*	@brief	This function initialize LCD after power up

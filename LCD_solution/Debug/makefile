@@ -48,38 +48,38 @@ endif
 
 # Add inputs and outputs from these tool invocations to the build variables 
 SECONDARY_FLASH += \
-keypad_solution_test.bin \
+LCD_solution.bin \
 
 SECONDARY_SIZE += \
-keypad_solution_test.siz \
+LCD_solution.siz \
 
 
 # All Target
-all: keypad_solution_test.elf secondary-outputs
+all: LCD_solution.elf secondary-outputs
 
 # Tool invocations
-keypad_solution_test.elf: $(OBJS) $(USER_OBJS)
+LCD_solution.elf: $(OBJS) $(USER_OBJS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: GNU ARM Cross C++ Linker'
-	arm-none-eabi-g++ -mcpu=cortex-m4 -mthumb -Og -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -ffreestanding -fno-move-loop-invariants -Wall -Wextra  -g3 -T mem.ld -T libs.ld -T sections.ld -nostartfiles -Xlinker --gc-sections -L"../ldscripts" -Wl,-Map,"keypad_solution_test.map" --specs=nano.specs -o "keypad_solution_test.elf" $(OBJS) $(USER_OBJS) $(LIBS)
+	arm-none-eabi-g++ -mcpu=cortex-m4 -mthumb -Og -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -ffreestanding -fno-move-loop-invariants -Wall -Wextra  -g3 -T mem.ld -T libs.ld -T sections.ld -nostartfiles -Xlinker --gc-sections -L"../ldscripts" -Wl,-Map,"LCD_solution.map" --specs=nano.specs -o "LCD_solution.elf" $(OBJS) $(USER_OBJS) $(LIBS)
 	@echo 'Finished building target: $@'
 	@echo ' '
 
-keypad_solution_test.bin: keypad_solution_test.elf
+LCD_solution.bin: LCD_solution.elf
 	@echo 'Invoking: GNU ARM Cross Create Flash Image'
-	arm-none-eabi-objcopy -O binary "keypad_solution_test.elf"  "keypad_solution_test.bin"
+	arm-none-eabi-objcopy -O binary "LCD_solution.elf"  "LCD_solution.bin"
 	@echo 'Finished building: $@'
 	@echo ' '
 
-keypad_solution_test.siz: keypad_solution_test.elf
+LCD_solution.siz: LCD_solution.elf
 	@echo 'Invoking: GNU ARM Cross Print Size'
-	arm-none-eabi-size --format=berkeley "keypad_solution_test.elf"
+	arm-none-eabi-size --format=berkeley "LCD_solution.elf"
 	@echo 'Finished building: $@'
 	@echo ' '
 
 # Other Targets
 clean:
-	-$(RM) $(CC_DEPS)$(C++_DEPS)$(OBJS)$(C_UPPER_DEPS)$(CXX_DEPS)$(SECONDARY_FLASH)$(SECONDARY_SIZE)$(ASM_DEPS)$(S_UPPER_DEPS)$(C_DEPS)$(CPP_DEPS) keypad_solution_test.elf
+	-$(RM) $(CC_DEPS)$(C++_DEPS)$(OBJS)$(C_UPPER_DEPS)$(CXX_DEPS)$(SECONDARY_FLASH)$(SECONDARY_SIZE)$(ASM_DEPS)$(S_UPPER_DEPS)$(C_DEPS)$(CPP_DEPS) LCD_solution.elf
 	-@echo ' '
 
 secondary-outputs: $(SECONDARY_FLASH) $(SECONDARY_SIZE)

@@ -5,6 +5,7 @@
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
 ../src/api_keypad_driver.c \
+../src/api_lcd_driver.c \
 ../src/gpio_interface.c \
 ../src/main.c \
 ../src/stm32f1xx_hal_msp.c \
@@ -12,6 +13,7 @@ C_SRCS += \
 
 OBJS += \
 ./src/api_keypad_driver.o \
+./src/api_lcd_driver.o \
 ./src/gpio_interface.o \
 ./src/main.o \
 ./src/stm32f1xx_hal_msp.o \
@@ -19,6 +21,7 @@ OBJS += \
 
 C_DEPS += \
 ./src/api_keypad_driver.d \
+./src/api_lcd_driver.d \
 ./src/gpio_interface.d \
 ./src/main.d \
 ./src/stm32f1xx_hal_msp.d \

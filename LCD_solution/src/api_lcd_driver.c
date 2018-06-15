@@ -1,19 +1,12 @@
 #include "api_lcd_driver.h"
 
 
-LCD_configStruct LCD_configMatrix[11]={
-		{LCD_Enable_PORT,LCD_Enable_PIN},
-		{LCD_RW_PORT,LCD_RW_PIN},
-		{LCD_ModeSelect_PORT,LCD_ModeSelect_PIN},
-		{LCD_D0_PORT,LCD_D0_PIN},
-		{LCD_D1_PORT,LCD_D1_PIN},
-		{LCD_D2_PORT,LCD_D2_PIN},
-		{LCD_D3_PORT,LCD_D3_PIN},
-		{LCD_D4_PORT,LCD_D4_PIN},
-		{LCD_D5_PORT,LCD_D5_PIN},
-		{LCD_D6_PORT,LCD_D6_PIN},
-		{LCD_D7_PORT,LCD_D7_PIN}
-};
+
+vPORTx createLCDvPort(vPort_comp *lcdVportDiet[]){
+  vPORTx LCDPort;
+  LCDPort = create_virtual_port(lcdVportDiet);
+  return LCDPort;
+}
 
 
 
@@ -31,6 +24,10 @@ void localLCD_check_status(){
 	gpio_lcd_config_data.port_mode_type = GPIO_PORT_INPUT_MODE;
 	gpio_lcd_config_data.port_input_type = GPIO_PORT_INPUT_TYPE_TRISTATE;
 	hal_gpio_port_setup(LCD_DATA_PORT, &gpio_lcd_config_data); 
+	//Sets up the LCD DATA PORT to Input for checking LCD status
+
+
+
 	
 	hal_gpio_write_to_pin(LCD_CONTROL_PORT, LCD_RWPin, LCD_READ_MODE);
 	hal_gpio_write_to_pin(LCD_CONTROL_PORT, LCD_ModeSelectPin, LCD_COMMAND_MODE);
