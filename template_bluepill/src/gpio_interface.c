@@ -12,36 +12,21 @@
 
 __IO uint32_t uwTICK;
 
-void write_gpio_port(GPIORegister_structure *GPIOX, uint16_t output_value){
-	GPIOX->OutputDatareg = output_value;
-}
-
-uint16_t read_gpio_port(GPIORegister_structure *GPIOx){
-	return (GPIOx->InputDataReg);
-}
-
-void configure_gpio_port(GPIORegister_structure *GPIOX, uint32_t lower_pins_mode, uint32_t higher_pins_mode){
-		GPIOX->ConfigRegLow= lower_pins_mode;
-		GPIOX->ConfigRegHigh= higher_pins_mode;
-}
-
-
-
 void configure_gpio_pin(GPIORegister_structure *GPIOX, uint8_t pin_number, uint8_t pin_mode){
 
 	if(pin_number < 8){
-		GPIOX->ConfigRegLow = ( GPIOX->ConfigRegLow & ( ~ ( 1<< (pin_number*4) ) ) ) | (pin_mode << (pin_number*4) );
+		GPIOX->ConfigRegLow = ( GPIOX->ConfigRegLow & ( ~ ( 0xf<< (pin_number*4) ) ) ) | (pin_mode << (pin_number*4) );
 
 	}
 	else{
 		pin_number = pin_number - 8;
-		GPIOX->ConfigRegHigh = ( GPIOX->ConfigRegHigh & ( ~ ( 1<< (pin_number*4) ) ) ) | (pin_mode << (pin_number*4) );
+		GPIOX->ConfigRegHigh = ( GPIOX->ConfigRegHigh & ( ~ ( 0xf<< (pin_number*4) ) ) ) | (pin_mode << (pin_number*4) );
 	}
 }
 
 uint8_t read_gpio_pin(GPIORegister_structure *GPIOX, uint8_t pin_number){
 
-	return( ( GPIOX->InputDataReg >> pin_number ) & 0x01 );
+	return( ( ( GPIOX->InputDataReg ) >> pin_number ) & 0x01 );
 }
 
 void write_gpio_pin(GPIORegister_structure *GPIOX, uint8_t pin_number, uint8_t output_value){

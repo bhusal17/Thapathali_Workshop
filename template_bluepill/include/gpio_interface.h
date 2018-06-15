@@ -13,16 +13,6 @@
 #include "stm32f1xx_hal.h"
 
 
-//Macros
-
-#define GPIO_PIN_INPUT_MODE_PULLUP 0x8
-
-/*****************/
-
-
-void configure_gpio_port(GPIORegister_structure *GPIOX, uint32_t lower_pins_mode, uint32_t higher_pins_mode);
-void write_gpio_port(GPIORegister_structure *GPIOX, uint16_t output_value);
-uint16_t read_gpio_port(GPIORegister_structure *GPIOx);
 
 void configure_gpio_pin(GPIORegister_structure *GPIOX, uint8_t pin_number, uint8_t pin_mode);
 

@@ -19,7 +19,8 @@ src/main.o: ../src/main.c ../include/main.h \
  ../system/include/stm32f1xx/stm32f1xx_hal_flash.h \
  ../system/include/stm32f1xx/stm32f1xx_hal_flash_ex.h \
  ../system/include/stm32f1xx/stm32f1xx_hal_pwr.h \
- ../include/gpio_interface.h ../include/port_struct.h
+ ../include/gpio_interface.h ../include/port_struct.h \
+ ../include/api_7segment_driver.h ../include/gpio_interface.h
 
 ../include/main.h:
 
@@ -68,3 +69,7 @@ src/main.o: ../src/main.c ../include/main.h \
 ../include/gpio_interface.h:
 
 ../include/port_struct.h:
+
+../include/api_7segment_driver.h:
+
+../include/gpio_interface.h:
