@@ -1,6 +1,20 @@
 #include "api_lcd_driver.h"
 
-gpio_port_conf_data gpio_lcd_config_data;
+
+LCD_configStruct LCD_configMatrix[11]={
+		{LCD_Enable_PORT,LCD_Enable_PIN},
+		{LCD_RW_PORT,LCD_RW_PIN},
+		{LCD_ModeSelect_PORT,LCD_ModeSelect_PIN},
+		{LCD_D0_PORT,LCD_D0_PIN},
+		{LCD_D1_PORT,LCD_D1_PIN},
+		{LCD_D2_PORT,LCD_D2_PIN},
+		{LCD_D3_PORT,LCD_D3_PIN},
+		{LCD_D4_PORT,LCD_D4_PIN},
+		{LCD_D5_PORT,LCD_D5_PIN},
+		{LCD_D6_PORT,LCD_D6_PIN},
+		{LCD_D7_PORT,LCD_D7_PIN}
+};
+
 
 
 /**					Send command to LCD

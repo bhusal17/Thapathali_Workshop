@@ -3,22 +3,49 @@
 
 
 //following macros are defined here, letter define these on the application file
+#define LCD_Enable_PORT
+#define LCD_Enable_PIN
 
-#define LCD_CONTROL_PORT	GPIO_PORT_A
-#define LCD_DATA_PORT		GPIO_PORT_D
-#define LCD_EnablePin		PB2
-#define LCD_RWPin			PB1
-#define LCD_ModeSelectPin	PB0
+#define LCD_RW_PORT
+#define LCD_RW_PIN
 
+#define LCD_ModeSelect_PORT
+#define LCD_ModeSelect_PIN
 
+#define LCD_D0_PORT
+#define LCD_D0_PIN
+
+#define LCD_D1_PORT
+#define LCD_D1_PIN
+
+#define LCD_D2_PORT
+#define LCD_D2_PIN
+
+#define LCD_D3_PORT
+#define LCD_D3_PIN
+
+#define LCD_D4_PORT
+#define LCD_D4_PIN
+
+#define LCD_D5_PORT
+#define LCD_D5_PIN
+
+#define LCD_D6_PORT
+#define LCD_D6_PIN
+
+#define LCD_D7_PORT
+#define LCD_D7_PIN
 
 #define F_CPU 16000000
 #include <util/delay.h>
-#include "hal_gpio_driver.h"
-
+#include "gpio_interface.h"
 //gpio_port_conf_data *gpio_lcd_config_data;
 
+typedef struct{
 
+	GPIORegister_structure *LCDX_port;
+	uint8_t LCDX_pin;
+}LCD_configStruct;
 
 //Macros definition
 //Define these macros in your program at the top
