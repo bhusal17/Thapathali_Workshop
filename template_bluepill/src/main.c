@@ -4,7 +4,7 @@
 #include "gpio_interface.h"
 
 
-static void MX_GPIO_Init(void);
+
 
 int main(void)
 {
@@ -28,10 +28,10 @@ int main(void)
 //	  GPIO_PORT_C->OutputDatareg = 0x0000;
 //	  delay_ms(50);
 
-	  *GPIO_ODR = 0xFFFF;
-	  delay_ms(500);
+	  *GPIO_ODR = 0x2000;
+	  delay_ms(1000);
 	  *GPIO_ODR = 0x0000;
-	  delay_ms(500);
+	  delay_ms(1000);
  }
 
 }

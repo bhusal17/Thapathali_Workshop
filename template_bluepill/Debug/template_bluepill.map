@@ -3917,7 +3917,7 @@ END GROUP
  .debug_str     0x000000000006a9e8      0x3c7 ./src/gpio_interface.o
                                       0x67bb1 (size before relaxing)
  .debug_str     0x000000000006adaf       0x20 ./src/main.o
-                                      0x67a1b (size before relaxing)
+                                      0x679fc (size before relaxing)
  .debug_str     0x000000000006adcf       0x46 ./src/stm32f1xx_hal_msp.o
                                       0x67b38 (size before relaxing)
  .debug_str     0x000000000006ae15       0x28 ./src/stm32f1xx_it.o
@@ -3970,7 +3970,7 @@ OUTPUT(template_bluepill.elf elf32-littlearm)
  .debug_ranges  0x00000000000003d0       0x10 ./src/stm32f1xx_hal_msp.o
  .debug_ranges  0x00000000000003e0       0x50 ./src/stm32f1xx_it.o
 
-.debug_macro    0x0000000000000000    0x1530d
+.debug_macro    0x0000000000000000    0x15307
  .debug_macro   0x0000000000000000      0x2df ./system/src/stm32f1xx/stm32f1xx_hal.o
  .debug_macro   0x00000000000002df      0xa54 ./system/src/stm32f1xx/stm32f1xx_hal.o
  .debug_macro   0x0000000000000d33       0x10 ./system/src/stm32f1xx/stm32f1xx_hal.o
@@ -4063,7 +4063,7 @@ OUTPUT(template_bluepill.elf elf32-littlearm)
  .debug_macro   0x00000000000146c0       0x10 ./system/src/cortexm/exception_handlers.o
  .debug_macro   0x00000000000146d0       0x92 ./system/src/cmsis/system_stm32f1xx.o
  .debug_macro   0x0000000000014762      0x2d8 ./src/gpio_interface.o
- .debug_macro   0x0000000000014a3a      0x2d8 ./src/main.o
- .debug_macro   0x0000000000014d12       0x58 ./src/main.o
- .debug_macro   0x0000000000014d6a      0x2bb ./src/stm32f1xx_hal_msp.o
- .debug_macro   0x0000000000015025      0x2e8 ./src/stm32f1xx_it.o
+ .debug_macro   0x0000000000014a3a      0x2d2 ./src/main.o
+ .debug_macro   0x0000000000014d0c       0x58 ./src/main.o
+ .debug_macro   0x0000000000014d64      0x2bb ./src/stm32f1xx_hal_msp.o
+ .debug_macro   0x000000000001501f      0x2e8 ./src/stm32f1xx_it.o

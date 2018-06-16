@@ -48,38 +48,38 @@ endif
 
 # Add inputs and outputs from these tool invocations to the build variables 
 SECONDARY_FLASH += \
-LCD_solution.bin \
+LCD_bic_teset.bin \
 
 SECONDARY_SIZE += \
-LCD_solution.siz \
+LCD_bic_teset.siz \
 
 
 # All Target
-all: LCD_solution.elf secondary-outputs
+all: LCD_bic_teset.elf secondary-outputs
 
 # Tool invocations
-LCD_solution.elf: $(OBJS) $(USER_OBJS)
+LCD_bic_teset.elf: $(OBJS) $(USER_OBJS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: GNU ARM Cross C++ Linker'
-	arm-none-eabi-g++ -mcpu=cortex-m4 -mthumb -Og -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -ffreestanding -fno-move-loop-invariants -Wall -Wextra  -g3 -T mem.ld -T libs.ld -T sections.ld -nostartfiles -Xlinker --gc-sections -L"../ldscripts" -Wl,-Map,"LCD_solution.map" --specs=nano.specs -o "LCD_solution.elf" $(OBJS) $(USER_OBJS) $(LIBS)
+	arm-none-eabi-g++ -mcpu=cortex-m4 -mthumb -Og -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -ffreestanding -fno-move-loop-invariants -Wall -Wextra  -g3 -T mem.ld -T libs.ld -T sections.ld -nostartfiles -Xlinker --gc-sections -L"../ldscripts" -Wl,-Map,"LCD_bic_teset.map" --specs=nano.specs -o "LCD_bic_teset.elf" $(OBJS) $(USER_OBJS) $(LIBS)
 	@echo 'Finished building target: $@'
 	@echo ' '
 
-LCD_solution.bin: LCD_solution.elf
+LCD_bic_teset.bin: LCD_bic_teset.elf
 	@echo 'Invoking: GNU ARM Cross Create Flash Image'
-	arm-none-eabi-objcopy -O binary "LCD_solution.elf"  "LCD_solution.bin"
+	arm-none-eabi-objcopy -O binary "LCD_bic_teset.elf"  "LCD_bic_teset.bin"
 	@echo 'Finished building: $@'
 	@echo ' '
 
-LCD_solution.siz: LCD_solution.elf
+LCD_bic_teset.siz: LCD_bic_teset.elf
 	@echo 'Invoking: GNU ARM Cross Print Size'
-	arm-none-eabi-size --format=berkeley "LCD_solution.elf"
+	arm-none-eabi-size --format=berkeley "LCD_bic_teset.elf"
 	@echo 'Finished building: $@'
 	@echo ' '
 
 # Other Targets
 clean:
-	-$(RM) $(CC_DEPS)$(C++_DEPS)$(OBJS)$(C_UPPER_DEPS)$(CXX_DEPS)$(SECONDARY_FLASH)$(SECONDARY_SIZE)$(ASM_DEPS)$(S_UPPER_DEPS)$(C_DEPS)$(CPP_DEPS) LCD_solution.elf
+	-$(RM) $(CC_DEPS)$(C++_DEPS)$(OBJS)$(C_UPPER_DEPS)$(CXX_DEPS)$(SECONDARY_FLASH)$(SECONDARY_SIZE)$(ASM_DEPS)$(S_UPPER_DEPS)$(C_DEPS)$(CPP_DEPS) LCD_bic_teset.elf
 	-@echo ' '
 
 secondary-outputs: $(SECONDARY_FLASH) $(SECONDARY_SIZE)
