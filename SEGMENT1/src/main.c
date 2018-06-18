@@ -1,84 +1,70 @@
-
-#include "main.h"
-#include "stm32f1xx_hal.h"
 #include "gpio_interface.h"
-#include "api_7segment_driver.h"
-
-#define segport gpio_port_a
 
 
-//uint8_t newch[]={0x3f,0x06,0x5b,0x4f,0x66,0x6d,0x7d,0x07,0x7f,0x67};
-void display_number(int );
+unsigned char ch[]={0xc0,0xf9,0xa4,0xb0,0x99,0x92,0x82,0xf8,0x80,0x90};
 
-void segmentPortInit(GPIORegister_structure *GPIOX){
-segport->ConfigRegLow = 0x11111111;
-}
 
 void display_number(int number){
-	write_gpio_port(GPIO_PORT_A,ch[number]);
-
-
+//your code here
 }
 
-void display_number(volatile uint32_t portbaseaddress,)
+ int main(void){
+	//TODO Connect the pin of 7 segment display to port A as shown in the whiteboard.(a->0,b->1_
 
-int main(void)
-{
+   enable_gpio_clock(GPIO_CLOCK_A);
 
- // int number = 0;
-  HAL_Init();
-
-  enable_gpio_clock(GPIO_CLOCK_C);
-  enable_gpio_clock(GPIO_CLOCK_A);
-  enable_gpio_clock(GPIO_CLOCK_B);
+   //Configuring pin 13 of PORT C as output
+   configure_gpio_pin(GPIO_PORT_C,13,0x0001);
 
 
-//  configure_gpio_pin(GPIO_PORT_A,0,0x0001);
-//  configure_gpio_pin(GPIO_PORT_A,1,0x0001);
-//  configure_gpio_pin(GPIO_PORT_A,2,0x0001);
-//  configure_gpio_pin(GPIO_PORT_A,3,0x0001);
-//  configure_gpio_pin(GPIO_PORT_A,4,0x0001);
-//  configure_gpio_pin(GPIO_PORT_A,5,0x0001);
-//  configure_gpio_pin(GPIO_PORT_A,6,0x0001);
-//  configure_gpio_pin(GPIO_PORT_A,7,0x0001);
-  configure_gpio_pin(GPIO_PORT_C,13,0x0001);
-//  configure_gpio_port(GPIO_PORT_A,0x11111111,0x11111111);
+  //TODO CONFIGURE pin 0-8 of GPIO_port A as output.
+  //hint: use 'for' loop with loop variable i=0 to 7 as pin number -->checkpoint one
 
 
-  api_gpio_config_for_7segment();
-  //api_7segment_out(0x7f);
 
-//  while(1){
-//
-//  }
+   while (1)
+   {
+	   	  //Displaying number 1 using write_gpio_pin function for common anode configuration
+	      write_gpio_pin(GPIO_PORT_A,0,1);
+	 	  write_gpio_pin(GPIO_PORT_A,1,0);
+	 	  write_gpio_pin(GPIO_PORT_A,2,0);
+	 	  write_gpio_pin(GPIO_PORT_A,3,1);
+	 	  write_gpio_pin(GPIO_PORT_A,4,1);
+	 	  write_gpio_pin(GPIO_PORT_A,5,1);
+	 	  write_gpio_pin(GPIO_PORT_A,6,1);
+	 	  write_gpio_pin(GPIO_PORT_A,7,1);
 
-  while(1){
-	  for(uint8_t i=0; i<9; i++){
-		 api_7segment_out(ch[i]);
-		 write_gpio_pin(GPIO_PORT_C,13,0);
-		  delay_ms(500);
-		  write_gpio_pin(GPIO_PORT_C,13,1);
-		  delay_ms(500);
-	  }
+	 	  //****************************************************************************************
+	 	  //TODO display any number between 0-9 using write_gpio_pin(portname,pinnumber,value) as above;
+	 	  //your code here
+	 	  //***************************************************************************************
+
+	 	  //*************************************************************************************
+	 	  //TODO display the same number using "write_gpio_port(portname,value)
+	 	  //hint write_gpio_port(GPIO_PORT_A,0xf9);
+	 	  //*******************************************************************************
+
+	 	  //************************************************************************************
+	 	  //declare a GLOBAL character array containing the required hex value from 0 to 9
+	 	  //************************************************************************************
+
+
+	 	  //****************************************************************************************
+	 	  //TODO Complete  the implementation for the function "void display_number(int number)" and call the function
+	 	  //hint:display_number(1);
+	 	  //*****************************************************************************************
+
+
+	 	  /*
+	 	   * int number =0;
+	 	   * display_number(number);
+	 	   * delay(500);
+	 	   * number++;
+	 	   */
+	 	  //uncomment above code
+	 	  //TODO Modify your code so that number switches from 9 to 0;
+	 	  //hint:use if condition
+
   }
-
-}
-
-
-
-
-//  while (1)
-//  {
-
-//	  display_number(number);
-//	  delay_ms(500);
-//	  number++;
-//	  if(number>9){
-//		  number=0;
-//	  }
-
-//
-//
-// }
-//}
+ }
 

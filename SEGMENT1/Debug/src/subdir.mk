@@ -4,21 +4,18 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
-../src/api_7segment_driver.c \
 ../src/gpio_interface.c \
 ../src/main.c \
 ../src/stm32f1xx_hal_msp.c \
 ../src/stm32f1xx_it.c 
 
 OBJS += \
-./src/api_7segment_driver.o \
 ./src/gpio_interface.o \
 ./src/main.o \
 ./src/stm32f1xx_hal_msp.o \
 ./src/stm32f1xx_it.o 
 
 C_DEPS += \
-./src/api_7segment_driver.d \
 ./src/gpio_interface.d \
 ./src/main.d \
 ./src/stm32f1xx_hal_msp.d \
