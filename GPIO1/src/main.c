@@ -16,20 +16,20 @@ int main(void)
 
 
     volatile uint32_t *GPIOA_ConfigRegHigh = 0x0, *GPIOA_ODR=0x0;
-    //TODO declare a pointer variable for "ConfigRegHigh" and
+    //TODO declare a pointer variable for "ConfigRegHigh","ConfigRegLow" and
     //"OutputDataRegister" for port C -->checkpoint1
 
 
     GPIOA_ConfigRegHigh  = (uint32_t*)(0x40010800+0x04);
     //TODO substitute address 0x40010800 with its macro definition
 
-    /* TODO Assign address to the pointer of "ConfigRegHigh"
+    /* TODO Assign address to the pointer of "ConfigRegHigh","ConfigRegLow"
     * and "OutputDataRegister of port C -->checkpoint 2
     *
     */
 
     //Configuring pin 10 of port A as an output
-    *GPIOA_ConfigRegHigh = *GPIOA_ConfigRegHigh | 0x0000100;
+    *GPIOA_ConfigRegHigh = *GPIOA_ConfigRegHigh | 0x0000200;
 
 
     //TODO Configure pin 13 of port C as an output

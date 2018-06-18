@@ -25,7 +25,7 @@ typedef struct{
 }GPIORegister_structure;
 
 
-//Base address of Register related to Ports
+//Macro definition of Base address of Register related to Ports
 
 #define GPIO_PORT_A ( (GPIORegister_structure *) GPIOA_BASE_ADDRESS )
 //TODO define "GPIO_PORT_B" and "GPIO_PORT_C" as above
